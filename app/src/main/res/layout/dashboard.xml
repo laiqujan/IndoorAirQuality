@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:context="com.example.indoorairquality.DashBoard"
+    android:background="#ffffff"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_height="150dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_width="match_parent">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/colappsingtoolbar"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll"
+            app:contentScrim="?attr/colorPrimary"
+            app:title="Air Quality"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            android:background="@drawable/indoorairquality">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarid"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fcfcfc"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:gravity="center"
+            android:id="@+id/ll">
+
+            <LinearLayout
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.CardView
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:id="@+id/bankcardId"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_margin="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/purpleshape"
+                            android:src="@drawable/ic_cloudy_day_1"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:text="Indoor Air Quality"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/lightgray"
+                            android:layout_margin="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="View Air Qyality Details"
+                            android:padding="5dp"
+                            android:textColor="@android:color/darker_gray"/>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_margin="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/pinkshape"
+                            android:src="@drawable/ic_wind_sensor"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:text="Sensors"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/lightgray"
+                            android:layout_margin="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="List Of Sensors"
+                            android:padding="5dp"
+                            android:textColor="@android:color/darker_gray"/>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.CardView
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_margin="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/greenshape"
+                            android:src="@drawable/ic_add_black_24dp"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:text="Add"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/lightgray"
+                            android:layout_margin="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Add New Sensor"
+                            android:padding="5dp"
+                            android:textColor="@android:color/darker_gray"/>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/yelloshape"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_resume" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Profile"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="10dp"
+                            android:background="@color/lightgray" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="See Profile"
+                            android:textColor="@android:color/darker_gray" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.CardView
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_width="340dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="10dp">
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/purpleshape"
+                            android:src="@drawable/ic_notification"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:text="Updates"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/lightgray"
+                            android:layout_margin="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Check Notifications"
+                            android:padding="5dp"
+                            android:textColor="@android:color/darker_gray"/>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+        </LinearLayout>/
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
