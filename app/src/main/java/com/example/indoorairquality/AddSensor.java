@@ -12,6 +12,7 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class AddSensor extends Fragment {
+//comment to test Git
 
 
     public AddSensor() {
