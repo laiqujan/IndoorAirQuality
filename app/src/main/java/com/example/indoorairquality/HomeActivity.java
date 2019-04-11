@@ -15,14 +15,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+//import for data fetching
+import android.util.Log;
+import org.json.JSONArray;
+import android.content.Context;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import android.content.Intent;
+import java.net.URL;
+import android.os.AsyncTask;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+//Variable for API Data fetch
+    public static WeatherTask weatherTask = new WeatherTask();
+    private static MeasurementDAO dbDAO;
+    private static Context mainAppContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        dbDAO=new MeasurementDAO(this);//DAO for measurement database
+        startService(new Intent(this, DataService.class));//Start the service to fetch data from API
+        mainAppContext = getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -122,5 +140,82 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //Function to get data from API
+    public static JSONObject getData(){
+
+        JSONObject wdata = null;
+
+
+        try {
+            // Location is hardcoded in this work
+            URL url = new URL("https://api.smartcitizen.me/v0/devices/9333");
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            StringBuffer json = new StringBuffer(1024);
+            String tmp = "";
+
+            while ((tmp = reader.readLine()) != null)
+                json.append(tmp).append("\n");
+            reader.close();
+
+            wdata = new JSONObject(json.toString());
+
+        } catch (Exception e) {
+
+            Log.d("Exception", e.getMessage());
+            return null;
+        }
+        return wdata;
+    }
+    //Class asynchronous to get the data and work on it without disturbing the whole application
+    public static class WeatherTask extends AsyncTask<Void, Void, String> {
+
+        public double _COratio=0.0133333;
+        public double _NOratio=0.1;
+        public WeatherTask() {
+        }
+
+        @Override
+        protected String doInBackground(final Void... params) {
+            Measurement test =dbDAO.getLastMeasurement();
+            JSONObject result = getData();
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(final String result) {//result de doInBackground
+
+            try {
+                JSONObject jsonGlobal = new JSONObject(result);//all information in the page
+                JSONObject jsonData = jsonGlobal.getJSONObject("data");//JSON object containing data
+                JSONArray jsonSensor = jsonData.getJSONArray("sensors");//JSON array containing sensors data
+                JSONObject jsonTemp=jsonSensor.getJSONObject(3);//JSON object containing temperature information
+                JSONObject jsonCO=jsonSensor.getJSONObject(4);//JSON object containing CO information
+                JSONObject jsonNO2=jsonSensor.getJSONObject(5);//JSON object containing NO2 information
+                JSONObject jsonHum=jsonSensor.getJSONObject(2);//JSON object containing humidity information
+                JSONObject jsonNoise=jsonSensor.getJSONObject(2);//JSON object containing humidity information
+                JSONObject jsonLight=jsonSensor.getJSONObject(7);//JSON object containing humidity information
+                Measurement temp =new Measurement(
+                        jsonTemp.getDouble("value"),
+                        (jsonCO.getDouble("value"))*_COratio,
+                        (jsonNO2.getDouble("value"))*_NOratio,
+                        jsonHum.getDouble("value"),
+                        jsonNoise.getDouble("value"),
+                        jsonLight.getDouble("value"));
+
+                dbDAO.addMeasurement(temp);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //Log.d("JSON: ", result);
+        }
     }
 }
