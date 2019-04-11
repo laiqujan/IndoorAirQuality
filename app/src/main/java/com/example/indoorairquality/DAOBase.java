@@ -4,7 +4,8 @@ import android.content.Context;
 public abstract class DAOBase {
     // This abstract class is used to handle the database in order to avoid plenty of code in
     // the class DataBase
-    protected final static int VERSION = 1;
+    //Value to change if we change the database
+    protected final static int VERSION = 3;
     // Name of the file representing my base
     protected final static String NOM = "database.db";
 

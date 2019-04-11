@@ -33,12 +33,14 @@ public class HomeActivity extends AppCompatActivity
 //Variable for API Data fetch
     public static WeatherTask weatherTask = new WeatherTask();
     private static MeasurementDAO dbDAO;
+    private static Context mainAppContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         dbDAO=new MeasurementDAO(this);//DAO for measurement database
         startService(new Intent(this, DataService.class));//Start the service to fetch data from API
+        mainAppContext = getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -174,6 +176,8 @@ public class HomeActivity extends AppCompatActivity
     //Class asynchronous to get the data and work on it without disturbing the whole application
     public static class WeatherTask extends AsyncTask<Void, Void, String> {
 
+        public double _COratio=0.0133333;
+        public double _NOratio=0.1;
         public WeatherTask() {
         }
 
@@ -195,7 +199,16 @@ public class HomeActivity extends AppCompatActivity
                 JSONObject jsonCO=jsonSensor.getJSONObject(4);//JSON object containing CO information
                 JSONObject jsonNO2=jsonSensor.getJSONObject(5);//JSON object containing NO2 information
                 JSONObject jsonHum=jsonSensor.getJSONObject(2);//JSON object containing humidity information
-                Measurement temp =new Measurement(jsonTemp.getDouble("value"),jsonCO.getDouble("value"),jsonNO2.getDouble("value"),jsonHum.getDouble("value"));
+                JSONObject jsonNoise=jsonSensor.getJSONObject(2);//JSON object containing humidity information
+                JSONObject jsonLight=jsonSensor.getJSONObject(7);//JSON object containing humidity information
+                Measurement temp =new Measurement(
+                        jsonTemp.getDouble("value"),
+                        (jsonCO.getDouble("value"))*_COratio,
+                        (jsonNO2.getDouble("value"))*_NOratio,
+                        jsonHum.getDouble("value"),
+                        jsonNoise.getDouble("value"),
+                        jsonLight.getDouble("value"));
+
                 dbDAO.addMeasurement(temp);
 
             } catch (JSONException e) {

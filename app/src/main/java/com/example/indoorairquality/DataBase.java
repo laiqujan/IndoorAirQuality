@@ -15,12 +15,14 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String KEY_CO = "co";
     public static final String KEY_NO2 = "no2";
     public static final String KEY_HUM = "humidity";
+    public static final String KEY_NOISE= "noise";
+    public static final String KEY_LIGHT = "light";
     public static final String KEY_DATE = "date";
     public static final String MEASUREMENT_TABLE_CREATE =
             "CREATE TABLE " + MEASUREMENT_TABLE_NAME + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     KEY_TEMPERATURE + " REAL, " + KEY_CO+" REAL, " + KEY_NO2 +" REAL, " +
-                    KEY_HUM +" REAL);";
+                    KEY_NOISE+" REAL, " + KEY_LIGHT+" REAL, " +KEY_HUM +" REAL);";
     public static final String METIER_TABLE_DROP = "DROP TABLE IF EXISTS " + MEASUREMENT_TABLE_NAME + ";";
 
     public DataBase(Context context, String name, CursorFactory factory, int version) {

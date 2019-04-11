@@ -2,18 +2,23 @@ package com.example.indoorairquality;
 
 public class Measurement {
     private long _id;
-    private double _temp;
-    private double _CO;
-    private double _NO2;
-    private double _humidity;
+    private double _temp;// Celsius
+    private double _CO;//ppm
+    private double _NO2;//ppm
+    private double _humidity;//%
+    private double _noise;//dB (decibel)
+    private double _light;//lux (1 lux = 1 lumen/m²)
 
     public Measurement(){}
-    public Measurement(double temp, double co,double no2, double hum){
+    public Measurement(double temp, double co,double no2, double hum, double noise, double light){
         _id=_id;
         _temp=temp;
         _CO=co;
         _NO2=no2;
         _humidity=hum;
+        _noise=noise;
+        _light=light;
+
     }
     public long get_id(){
         return _id;
@@ -35,6 +40,14 @@ public class Measurement {
         return _temp;
     }
 
+    public double get_noise() {
+        return _noise;
+    }
+
+    public double get_light() {
+        return _light;
+    }
+
     public void set_id(long _id) {
         this._id = _id;
     }
@@ -53,5 +66,13 @@ public class Measurement {
 
     public void set_temp(double _temp) {
         this._temp = _temp;
+    }
+
+    public void set_noise(double _noise) {
+        this._noise = _noise;
+    }
+
+    public void set_light(double _light) {
+        this._light = _light;
     }
 }
