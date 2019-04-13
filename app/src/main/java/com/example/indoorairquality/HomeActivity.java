@@ -30,15 +30,17 @@ import android.os.AsyncTask;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-//Variable for API Data fetch
+    //Variable for API Data fetch
     public static WeatherTask weatherTask = new WeatherTask();
     private static MeasurementDAO dbDAO;
     private static Context mainAppContext;
+    private Measurement measurement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         dbDAO=new MeasurementDAO(this);//DAO for measurement database
+        measurement=dbDAO.getLastMeasurement();
         startService(new Intent(this, DataService.class));//Start the service to fetch data from API
         mainAppContext = getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -46,12 +48,20 @@ public class HomeActivity extends AppCompatActivity
 
         if (savedInstanceState == null) {
             Fragment newFragment = new HomeFragement();
+            Bundle data=new Bundle();
+            data.putString("temperature",""+(double)Math.round(measurement.get_temp()));
+            data.putString("carbon",""+(double)Math.round(measurement.get_CO()));
+            data.putString("humidity",""+(double)Math.round(measurement.get_humidity()));
+            data.putString("noise",""+(double)Math.round(measurement.get_noise()));
+            data.putString("light",""+(double)Math.round(measurement.get_light()));
+            data.putString("nitrogen",""+(double)Math.round(measurement.get_NO2()));
+            newFragment.setArguments(data);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.content_frame, newFragment);
             ft.addToBackStack(null);
             ft.commit();
         }
-
+        //homeFragement= (HomeFragement)getSupportFragmentManager().findFragmentById(R.id.content_frame);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,9 +119,16 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
-        Bundle bundle = new Bundle();
+        Bundle data = new Bundle();
         if (id == R.id.home) {
+            data.putString("temperature",""+(double)Math.round(measurement.get_temp()));
+            data.putString("carbon",""+(double)Math.round(measurement.get_CO()));
+            data.putString("humidity",""+(double)Math.round(measurement.get_humidity()));
+            data.putString("noise",""+(double)Math.round(measurement.get_noise()));
+            data.putString("light",""+(double)Math.round(measurement.get_light()));
+            data.putString("nitrogen",""+(double)Math.round(measurement.get_NO2()));
             fragment = new HomeFragement();
+            fragment.setArguments(data);
         }
         else if (id == R.id.add_sensor) {
             fragment= new AddSensor();
@@ -128,10 +145,17 @@ public class HomeActivity extends AppCompatActivity
             startActivity(i);
         }
         else if (id == R.id.policy) {
-         // re-direct to we web page
+            // re-direct to we web page
         }
         if (fragment == null) {
-          fragment = new HomeFragement();
+            data.putString("temperature",""+(double)Math.round(measurement.get_temp()));
+            data.putString("carbon",""+(double)Math.round(measurement.get_CO()));
+            data.putString("humidity",""+(double)Math.round(measurement.get_humidity()));
+            data.putString("noise",""+(double)Math.round(measurement.get_noise()));
+            data.putString("light",""+(double)Math.round(measurement.get_light()));
+            data.putString("nitrogen",""+(double)Math.round(measurement.get_NO2()));
+            fragment = new HomeFragement();
+            fragment.setArguments(data);
         }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, fragment);
@@ -179,12 +203,14 @@ public class HomeActivity extends AppCompatActivity
         public double _COratio=0.0133333;
         public double _NOratio=0.1;
         public WeatherTask() {
+
         }
 
         @Override
         protected String doInBackground(final Void... params) {
             Measurement test =dbDAO.getLastMeasurement();
             JSONObject result = getData();
+
             return result.toString();
         }
 

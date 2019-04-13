@@ -21,56 +21,7 @@
                 android:orientation="vertical"
 
                 android:padding="0dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:gravity="center"
 
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="340dp"
-                        android:layout_height="150dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground">
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="1011.1 hPa"
-                                android:textSize="24dp"
-                                android:textColor="@color/green"
-                                android:textStyle="bold" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@color/lightgray" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:padding="5dp"
-                                android:text="Air Pressure"
-                                android:textColor="@android:color/black" />
-
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-
-
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +30,6 @@
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
-                        android:id="@+id/temperature"
                         android:layout_width="160dp"
                         android:layout_height="190dp"
                         android:layout_margin="10dp"
@@ -95,9 +45,10 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/temperature"
                                 android:layout_marginTop="10dp"
                                 android:textColor="@color/green"
-                                android:text="38.60 °C"
+                                android:text=""
                                 android:textSize="24dp"
                                 android:textStyle="bold" />
 
@@ -113,8 +64,9 @@
                                 android:gravity="center"
                                 android:padding="5dp"
                                 android:textSize="16dp"
-                                android:text="Temperature"
+                                android:text="Inside Temperature"
                                 android:textColor="@android:color/black" />
+
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
 
@@ -134,58 +86,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/carbon"
                                 android:layout_marginTop="10dp"
-                                android:text="75.6%"
+                                android:text=""
                                 android:textSize="24dp"
                                 android:textColor="@color/yello"
-                                android:textStyle="bold" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@color/lightgray" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:padding="5dp"
-                                android:text="Humidity"
-                                android:textColor="@android:color/black" />
-
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="190dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="498 ppm"
-                                android:textSize="24dp"
-                                android:textColor="@color/green"
                                 android:textStyle="bold" />
 
                             <View
@@ -205,6 +110,103 @@
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
 
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="190dp"
+                        android:layout_margin="10dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/humidity"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/green"
+                                android:text=""
+                                android:textSize="24dp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="10dp"
+                                android:background="@color/lightgray" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:textSize="16dp"
+                                android:text="Humidity"
+                                android:textColor="@android:color/black" />
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="190dp"
+                        android:layout_margin="10dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/noise"
+                                android:layout_marginTop="10dp"
+                                android:text=""
+                                android:textSize="24dp"
+                                android:textColor="@color/yello"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="10dp"
+                                android:background="@color/lightgray" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="Noise"
+                                android:textColor="@android:color/black" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <android.support.v7.widget.CardView
                         android:layout_width="160dp"
                         android:layout_height="190dp"
@@ -222,7 +224,48 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="0.0 ppm"
+                                android:id="@+id/light"
+                                android:text=""
+                                android:textSize="24dp"
+                                android:textColor="@color/fair_color"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="10dp"
+                                android:background="@color/lightgray" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="Light"
+                                android:textColor="@android:color/black" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="190dp"
+                        android:layout_margin="10dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:id="@+id/nitrogen"
+                                android:text=""
                                 android:textSize="24dp"
                                 android:textColor="@color/green"
                                 android:textStyle="bold" />
@@ -238,7 +281,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:padding="5dp"
-                                android:text="Carbon Monoxide"
+                                android:text="Nitrogen Dioxide"
                                 android:textColor="@android:color/black" />
 
                         </LinearLayout>

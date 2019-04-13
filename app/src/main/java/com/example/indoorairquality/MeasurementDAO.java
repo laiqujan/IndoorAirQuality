@@ -2,6 +2,7 @@ package com.example.indoorairquality;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.database.Cursor;
 import java.util.ArrayList;

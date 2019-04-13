@@ -1,6 +1,11 @@
 package com.example.indoorairquality;
 
+import android.util.Log;
+
+import java.util.Observable;
+
 public class Measurement {
+    private Measurement measurement;
     private long _id;
     private double _temp;// Celsius
     private double _CO;//ppm
@@ -59,7 +64,6 @@ public class Measurement {
     public void set_humidity(double _humidity) {
         this._humidity = _humidity;
     }
-
     public void set_NO2(double _NO2) {
         this._NO2 = _NO2;
     }
@@ -75,4 +79,5 @@ public class Measurement {
     public void set_light(double _light) {
         this._light = _light;
     }
+
 }
