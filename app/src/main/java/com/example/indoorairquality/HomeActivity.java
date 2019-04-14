@@ -61,7 +61,14 @@ public class HomeActivity extends AppCompatActivity
             ft.addToBackStack(null);
             ft.commit();
         }
-        //homeFragement= (HomeFragement)getSupportFragmentManager().findFragmentById(R.id.content_frame);
+        /*
+        <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +77,7 @@ public class HomeActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -107,6 +115,8 @@ public class HomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent=new Intent(this,SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -118,6 +128,8 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+       // MeasurementDAO measurementDAO = new MeasurementDAO(mainAppContext);
+       // Measurement measurement= measurementDAO.getLastMeasurement();
         Fragment fragment = null;
         Bundle data = new Bundle();
         if (id == R.id.home) {
@@ -136,9 +148,7 @@ public class HomeActivity extends AppCompatActivity
             fragment= new SensorFragment();
         } else if (id == R.id.units) {
             fragment= new UnitsFragment();
-        } else if (id == R.id.notif_setting) {
-            fragment= new NotificationsFragment();
-        } else if (id == R.id.profile) {
+        }  else if (id == R.id.profile) {
             fragment= new ProfileFragment();
         } else if (id == R.id.logout) {
             Intent i = new Intent(getApplicationContext(),MainActivity.class);
