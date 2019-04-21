@@ -45,10 +45,14 @@ public class HomeActivity extends AppCompatActivity
     private static MeasurementDAO dbDAO;
     private static Context mainAppContext;
     //limit value for data
+    public static int levels []={0,0,0};//table of actual level of danger for {CO,NO2,Hum} 0 = good quality / 1 = going worst / 2 = very bad quality
+    //use for notification, we send notification when we pass in a different danger level
     public static double limit_COMax = 15.00;
     public static double limit_COGood = 9.00;
-    public static double limit_NO = 4.00;
-    public static double limit_Hum = 50.00;
+    public static double limit_NOGood = 3.50;
+    public static double limit_NOMax = 4.00;
+    public static double limit_HumDry= 25.00;
+    public static double limit_HumWet = 75.00;
     private static String channel_name="Air Quality"; //name of the channel as in seen in exercise work
     private static String CHANNEL_ID="notify_001";//channel name as in seen in exercise work
     private Measurement measurement;
@@ -228,36 +232,77 @@ public class HomeActivity extends AppCompatActivity
 
     // Function to check if the value fetch are good for human
     public static void checkValue(Measurement _measur){
+    // check the value and actual danger level to avoid plenty of notification, we notify the user only once when it's going worst or better
 
-        if(_measur.get_CO()>limit_COGood){
-            if(_measur.get_CO()<limit_COMax){
-                String msg = "Ambient Air is going worst. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+        // CO notification
+        if(_measur.get_CO()>limit_COGood){//bad quality of air
+            if(_measur.get_CO()<limit_COMax && levels[0]==0){// danger area 1 and before the qulity of air was good
+                String msg = "Ambient Air is going worst, you should open the window. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO())+"ppm";
+                levels[0]=1;// we pass in level 1
                 NotifyAboutData(mainAppContext,msg);
             }
-            else if(_measur.get_CO()>limit_COMax){
-                String msg = "Ambient Air is very bad. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+            else if(_measur.get_CO()<limit_COMax && levels[0]==2){// danger zone 1 and before the qulity of air was very bad
+                String msg = "Ambient Air is going better but still not good. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO())+"ppm";
+                levels[0]=1;// we pass in level 1
+                NotifyAboutData(mainAppContext,msg);
+            }
+            else if(_measur.get_CO()>limit_COMax && (levels[0]==1 || levels[0]==0) ){
+                String msg = "Ambient Air is very bad, you should open the window. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO())+"ppm";
+                levels[0]=2;// we pass in level 2
                 NotifyAboutData(mainAppContext,msg);
             }
         }
-        if(_measur.get_NO2()>limit_NO){
-            /*if(_measur.get_CO()<limit_COMax){
-                String msg = "Ambient Air is going worst. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+        else{//the air quality is in the good area = danger area 0
+            if(levels[0]==1 || levels[0] == 2){//if before we were in the danger area 1 or 2 we decrease the level
+                String msg = "Ambient Air is good. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO())+"ppm";
+                levels[0]=0;
                 NotifyAboutData(mainAppContext,msg);
             }
-            else if(_measur.get_CO()>limit_COMax){
-                String msg = "Ambient Air is very bad. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
-                NotifyAboutData(mainAppContext,msg);
-            }*/
         }
-        if(_measur.get_humidity()>limit_Hum) {
-            /*if(_measur.get_CO()<limit_COMax){
-                String msg = "Ambient Air is going worst. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+
+        //NO2 notification
+        if(_measur.get_NO2()>limit_NOGood){//bad quality of air
+            if(_measur.get_CO()<limit_COMax && levels[1]==0){// danger area 1 and before the qulity of air was good
+                String msg = "Ambient Air is going worst, you should open the window. Actual NO2 amount : "+ String.format(" %.2f",_measur.get_NO2())+"ppm";
+                levels[1]=1;// we pass in level 1
                 NotifyAboutData(mainAppContext,msg);
             }
-            else if(_measur.get_CO()>limit_COMax){
-                String msg = "Ambient Air is very bad. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+            else if(_measur.get_NO2()<limit_NOMax && levels[1]==2){// danger zone 1 and before the qulity of air was very bad
+                String msg = "Ambient Air is going better but still not good. Actual NO amount : "+ String.format(" %.2f", _measur.get_NO2())+"ppm";
+                levels[1]=1;// we pass in level 1
                 NotifyAboutData(mainAppContext,msg);
-            }*/
+            }
+            else if(_measur.get_NO2()>limit_NOMax && (levels[1]==1 || levels[1]==0) ){
+                String msg = "Ambient Air is very bad, you should open the window. Actual NO2 amount : "+ String.format(" %.2f", _measur.get_NO2())+"ppm";
+                levels[1]=2;// we pass in level 2
+                NotifyAboutData(mainAppContext,msg);
+            }
+        }
+        else{//the air quality is in the good area = danger area 0
+            if(levels[1]==1 || levels[1] == 2){//if before we were in the danger area 1 or 2 we decrease the level
+                String msg = "Ambient Air is Good. Actual NO2 amount : "+ String.format(" %.2f", _measur.get_NO2())+"ppm";
+                levels[1]=0;
+                NotifyAboutData(mainAppContext,msg);
+            }
+        }
+
+        //Humidity
+        if(limit_HumDry < _measur.get_humidity() && _measur.get_humidity() < limit_HumWet && levels[2]!=0) {
+            String msg = " Humidity in ambient Air is better. Actual humidity : "+ String.format(" %.2f", _measur.get_humidity() )+"%";
+            levels[2]=0;// we pass in level 0
+            NotifyAboutData(mainAppContext,msg);
+        }
+        else {
+            if(_measur.get_humidity() < limit_HumDry && levels[2]!=1){
+                String msg = "Ambient Air is too dry you should turn down the air condition. Actual humidity : "+ String.format(" %.2f", _measur.get_humidity() )+"%";
+                levels[2]=1;// we pass in level 1
+                NotifyAboutData(mainAppContext,msg);
+            }
+            if(_measur.get_humidity() > limit_HumWet && levels[2]!=2){
+                String msg = "Ambient Air is too wet you should turn on the air condition. Actual humidity : "+ String.format(" %.2f", _measur.get_humidity() )+"%";
+                levels[2]=2;// we pass in level 2
+                NotifyAboutData(mainAppContext,msg);
+            }
         }
 
     }
