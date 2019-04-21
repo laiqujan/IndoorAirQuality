@@ -27,6 +27,16 @@ import java.net.HttpURLConnection;
 import android.content.Intent;
 import java.net.URL;
 import android.os.AsyncTask;
+//import for notification
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.support.v4.app.NotificationCompat;
+import android.os.Build;
+import android.provider.Settings;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +44,13 @@ public class HomeActivity extends AppCompatActivity
     public static WeatherTask weatherTask = new WeatherTask();
     private static MeasurementDAO dbDAO;
     private static Context mainAppContext;
+    //limit value for data
+    public static double limit_COMax = 15.00;
+    public static double limit_COGood = 9.00;
+    public static double limit_NO = 4.00;
+    public static double limit_Hum = 50.00;
+    private static String channel_name="Air Quality"; //name of the channel as in seen in exercise work
+    private static String CHANNEL_ID="notify_001";//channel name as in seen in exercise work
     private Measurement measurement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,6 +225,82 @@ public class HomeActivity extends AppCompatActivity
         return wdata;
     }
     //Class asynchronous to get the data and work on it without disturbing the whole application
+
+    // Function to check if the value fetch are good for human
+    public static void checkValue(Measurement _measur){
+
+        if(_measur.get_CO()>limit_COGood){
+            if(_measur.get_CO()<limit_COMax){
+                String msg = "Ambient Air is going worst. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+                NotifyAboutData(mainAppContext,msg);
+            }
+            else if(_measur.get_CO()>limit_COMax){
+                String msg = "Ambient Air is very bad. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+                NotifyAboutData(mainAppContext,msg);
+            }
+        }
+        if(_measur.get_NO2()>limit_NO){
+            /*if(_measur.get_CO()<limit_COMax){
+                String msg = "Ambient Air is going worst. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+                NotifyAboutData(mainAppContext,msg);
+            }
+            else if(_measur.get_CO()>limit_COMax){
+                String msg = "Ambient Air is very bad. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+                NotifyAboutData(mainAppContext,msg);
+            }*/
+        }
+        if(_measur.get_humidity()>limit_Hum) {
+            /*if(_measur.get_CO()<limit_COMax){
+                String msg = "Ambient Air is going worst. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+                NotifyAboutData(mainAppContext,msg);
+            }
+            else if(_measur.get_CO()>limit_COMax){
+                String msg = "Ambient Air is very bad. Actual CO amount : "+ String.format(" %.2f", _measur.get_CO());
+                NotifyAboutData(mainAppContext,msg);
+            }*/
+        }
+
+    }
+    public static void NotifyAboutData(Context c, String NotifText){
+
+
+        NotificationManager notificationManager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
+// What happens, e.g., what activity is launched, if notification is clicked
+        Intent intent = new Intent(c,HomeActivity.class);
+// Since this can happen in the future, wrap it in a pending intent
+        PendingIntent pIntent = PendingIntent.getActivity(c, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        //Builder to help creating a Notification
+        NotificationCompat.Builder nBuilder =new NotificationCompat.Builder(c,"");
+        //Class to define style of the notification
+        NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
+        bigText.bigText(NotifText);
+        bigText.setBigContentTitle("Air Quality");
+        bigText.setSummaryText("Bad Quality of your ambient air");
+
+        nBuilder.setContentIntent(pIntent);
+        nBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
+        nBuilder.setContentTitle("Weather");
+        nBuilder.setContentText(NotifText);
+        nBuilder.setPriority(Notification.PRIORITY_MAX);
+        nBuilder.setStyle(bigText);
+        long vibration[]={0,200,100,200,100,200};
+        nBuilder.setVibrate(vibration);
+        nBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = channel_name;
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            notificationManager.createNotificationChannel(channel);
+        }
+        //send notification
+        notificationManager.notify(0, nBuilder.build());
+
+    }
     public static class WeatherTask extends AsyncTask<Void, Void, String> {
 
         public double _COratio=0.0133333;
@@ -243,10 +336,10 @@ public class HomeActivity extends AppCompatActivity
                         (jsonNO2.getDouble("value"))*_NOratio,
                         jsonHum.getDouble("value"),
                         jsonNoise.getDouble("value"),
-                        jsonLight.getDouble("value"));
-
+                        jsonLight.getDouble("value"),
+                        jsonData.getString("recorded_at"));
                 dbDAO.addMeasurement(temp);
-
+                checkValue(temp);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
