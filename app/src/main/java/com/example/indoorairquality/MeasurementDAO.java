@@ -199,6 +199,7 @@ public class MeasurementDAO extends DAOBase {
         }
         return carbon_List;
     }
+    //function that return  list of NO2 data of the previous week ||Warning : can't know the date of each data
     public ArrayList<Double> getWeekNO2(){
         ArrayList<Measurement> list = new ArrayList<Measurement>();
         ArrayList<Double> NO_List = new ArrayList<java.lang.Double>();
