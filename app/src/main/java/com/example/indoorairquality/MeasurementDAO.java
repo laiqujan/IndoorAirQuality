@@ -24,7 +24,7 @@ public class MeasurementDAO extends DAOBase {
             "CREATE TABLE " + MEASUREMENT_TABLE_NAME + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     KEY_TEMPERATURE + " REAL, " + KEY_CO+" REAL, " + KEY_NO2 +" REAL, " +
-                    KEY_NOISE+" REAL, " + KEY_LIGHT+" REAL, " +KEY_HUM +" REAL,"+ KEY_DateString +" TEXT," + KEY_DateLong +"INTEGER);";
+                    KEY_NOISE+" REAL, " + KEY_LIGHT+" REAL, " +KEY_HUM +" REAL,"+ KEY_DateString +" TEXT," + KEY_DateLong +" INTEGER);";
     public static final String METIER_TABLE_DROP = "DROP TABLE IF EXISTS " + MEASUREMENT_TABLE_NAME + ";";
 
 
@@ -91,8 +91,8 @@ public class MeasurementDAO extends DAOBase {
         Log.d("HUMIDITY", Double.toString(temp.get_humidity()));
         Log.d("NOISE", Double.toString(temp.get_noise()));
         Log.d("LIGHT", Double.toString(temp.get_light()));
-        Log.d("DATEString", Double.toString(temp.get_noise()));
-        Log.d("DateLong", Double.toString(temp.get_light()));
+        Log.d("DATEString", temp.get_date_string());
+        Log.d("DateLong", Long.toString(temp.get_date_long()));
         cursor.close();
         mDb.close();
         return temp;

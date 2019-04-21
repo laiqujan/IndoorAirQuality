@@ -23,7 +23,7 @@ public class DataBase extends SQLiteOpenHelper {
             "CREATE TABLE " + MEASUREMENT_TABLE_NAME + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     KEY_TEMPERATURE + " REAL, " + KEY_CO+" REAL, " + KEY_NO2 +" REAL, " +
-                    KEY_NOISE+" REAL, " + KEY_LIGHT+" REAL, " +KEY_HUM +" REAL,"+ KEY_DateString +" TEXT," + KEY_DateLong +"INTEGER);";
+                    KEY_NOISE+" REAL, " + KEY_LIGHT+" REAL, " +KEY_HUM +" REAL,"+ KEY_DateString +" TEXT," + KEY_DateLong +" INTEGER);";
     public static final String METIER_TABLE_DROP = "DROP TABLE IF EXISTS " + MEASUREMENT_TABLE_NAME + ";";
 
     public DataBase(Context context, String name, CursorFactory factory, int version) {

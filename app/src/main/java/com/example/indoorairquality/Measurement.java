@@ -32,14 +32,15 @@ public class Measurement {
         _noise=noise;
         _light=light;
         _date_string=date;
+        _date=Calendar.getInstance();
         //to switch the string date into a long we need to delete some char
         //date in string looks like 2019-04-11T12:47:37Z so we need to delete - T : and Z
         String tmp = date;
-        tmp.replace("-","");
-        tmp.replace("T","");
-        tmp.replace(":","");
-        tmp.replace("Z","");//now the string looks like 20190411124737
-        _date_long=Long.parseLong(tmp);//now the date is a long with value 20190411124737
+        tmp=tmp.replace("-","");
+        tmp=tmp.replace("T","");
+        tmp=tmp.replace(":","");
+        tmp=tmp.replace("Z","");//now the string looks like 20190411124737
+        _date_long=Long.parseLong(tmp);
         // to create the calendar we need to set each parameter e.g year month...
         if(Build.VERSION.SDK_INT >= 26){//Calendar.Builder only with API>=26
             Calendar.Builder cBuilder = new Calendar.Builder().setCalendarType("gregorian");
@@ -118,12 +119,15 @@ public class Measurement {
     //the format need to be exactly like : 2019-04-11T12:47:37Z
     public void set_date_string(String date) {
         this._date_string = date;
+        _date=Calendar.getInstance();
         // we set the long date format at the same time to avoid user to do it
-        String tmp = date;
-        tmp.replace("-","");
-        tmp.replace("T","");
-        tmp.replace(":","");
-        tmp.replace("Z","");//now the string looks like 20190411124737
+        String tmp;
+        tmp = date;
+        tmp=tmp.replace("-","");
+        tmp=tmp.replace("T","");
+        tmp=tmp.replace(":","");
+        tmp=tmp.replace("Z","");//now the string looks like 20190411124737
+        Log.d("string", tmp);
         _date_long=Long.parseLong(tmp);
         // to create the calendar we need to set each parameter e.g year month...
         if(Build.VERSION.SDK_INT >= 26){//Calendar.Builder only with API>=26
