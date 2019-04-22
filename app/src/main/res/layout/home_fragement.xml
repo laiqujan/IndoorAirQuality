@@ -4,21 +4,42 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/ic_launcher_indoor_2"
-        tools:context="HomeFragement">
+        android:background="@color/green"
+        tools:context=".HomeFragement">
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:background="@color/green"
                 android:orientation="vertical"
+                android:gravity="center"
+
                 android:padding="0dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Baby's Room"
+                    android:textColor="@color/white"
+                    android:paddingRight="0dp"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Today:11.30 AM"
+                    android:textAlignment="textStart"
+                    android:paddingRight="0dp"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -28,8 +49,8 @@
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
-                        android:layout_width="180dp"
-                        android:layout_height="190dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="104dp"
                         android:layout_margin="8dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -37,22 +58,32 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#3d6b89"
+                            android:background="@color/dashboardColor"
                             android:gravity="center"
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/temperature"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/temperature"
-                                android:drawableBottom="@mipmap/ic_launcher_temp"
                                 android:layout_marginTop="0dp"
-                                android:textColor="@color/green"
+                                android:text="21.0 C"
                                 android:textAlignment="textEnd"
-                                android:text=""
+                                android:textColor="@color/good_color"
                                 android:textSize="24dp"
                                 android:textStyle="bold" />
 
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="Temperature"
+                                android:drawableLeft="@drawable/ic_thermometer"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
@@ -63,19 +94,25 @@
                                 android:id="@+id/temperatureHistory"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
                                 android:background="@color/background_color"
+                                android:gravity="center"
                                 android:padding="5dp"
-                                android:textSize="16dp"
+                                android:text="@string/history"
                                 android:textColor="@color/white"
-                                android:text="Temp History"
-                                />
+                                android:textSize="14dp" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
-                        android:layout_width="180dp"
-                        android:layout_height="190dp"
+                        android:layout_width="190dp"
+                        android:layout_height="104dp"
                         android:layout_margin="8dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -84,21 +121,31 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:background="#668475"
+                            android:background="@color/dashboardColor"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableBottom="@mipmap/ic_launcher_carbon"
                                 android:id="@+id/carbon"
                                 android:layout_marginTop="0dp"
                                 android:textAlignment="textEnd"
-                                android:text=""
+                                android:text="13 ppm"
                                 android:textSize="24dp"
                                 android:textColor="@color/yello"
                                 android:textStyle="bold" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="Carbon Monoxide"
+                                android:drawableLeft="@drawable/ic_carbon_monoxide"
+                                android:textAlignment="textEnd"
+                                android:drawablePadding="5dp"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
@@ -112,25 +159,17 @@
                                 android:gravity="center"
                                 android:background="@color/background_color"
                                 android:padding="5dp"
-                                android:textSize="16dp"
+                                android:textSize="14dp"
                                 android:textColor="@color/white"
-                                android:text="Carbon History"
+                                android:text="@string/history"
+
                                 />
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
                     <android.support.v7.widget.CardView
-                        android:layout_width="180dp"
-                        android:layout_height="190dp"
+                        android:layout_width="190dp"
+                        android:layout_height="104dp"
                         android:layout_margin="8dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -138,7 +177,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#3d6b89"
+                            android:background="@color/dashboardColor"
                             android:gravity="center"
                             android:orientation="vertical">
 
@@ -146,12 +185,23 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/humidity"
-                                android:drawableBottom="@mipmap/ic_launcher_hum"
                                 android:layout_marginTop="0dp"
                                 android:textColor="@color/green"
                                 android:textAlignment="textEnd"
                                 android:text=""
                                 android:textSize="24dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="Humidity"
+                                android:drawablePadding="5dp"
+                                android:drawableLeft="@drawable/ic_humpercentage"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <View
@@ -167,16 +217,23 @@
                                 android:gravity="center"
                                 android:background="@color/background_color"
                                 android:padding="5dp"
-                                android:textSize="16dp"
+                                android:textSize="14dp"
                                 android:textColor="@color/white"
-                                android:text="Humidity History"
+                                android:text="@string/history"
                                 />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
-                        android:layout_width="180dp"
-                        android:layout_height="190dp"
+                        android:layout_width="190dp"
+                        android:layout_height="104dp"
                         android:layout_margin="8dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -185,19 +242,30 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:background="#668475"
+                            android:background="@color/dashboardColor"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableBottom="@mipmap/ic_launcher_noise"
                                 android:id="@+id/noise"
                                 android:layout_marginTop="0dp"
                                 android:textAlignment="textEnd"
                                 android:text=""
                                 android:textSize="24dp"
                                 android:textColor="@color/yello"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="Noise"
+                                android:drawableLeft="@drawable/ic_noise"
+                                android:drawablePadding="5dp"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <View
@@ -213,26 +281,16 @@
                                 android:gravity="center"
                                 android:background="@color/background_color"
                                 android:padding="5dp"
-                                android:textSize="16dp"
+                                android:textSize="14dp"
                                 android:textColor="@color/white"
-                                android:text="Noise History"
+                                android:text="@string/history"
                                 />
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
                     <android.support.v7.widget.CardView
-                        android:layout_width="180dp"
-                        android:layout_height="190dp"
+                        android:layout_width="190dp"
+                        android:layout_height="104dp"
                         android:layout_margin="8dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -241,19 +299,30 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:background="#3d6b89"
+                            android:background="@color/dashboardColor"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAlignment="textEnd"
-                                android:drawableBottom="@mipmap/ic_launcher_light"
                                 android:layout_marginTop="0dp"
                                 android:id="@+id/light"
                                 android:text=""
                                 android:textSize="24dp"
                                 android:textColor="@color/fair_color"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:drawablePadding="5dp"
+                                android:text="Light"
+                                android:drawableLeft="@drawable/ic_balancelight"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <View
@@ -269,17 +338,25 @@
                                 android:gravity="center"
                                 android:background="@color/background_color"
                                 android:padding="5dp"
-                                android:textSize="16dp"
+                                android:textSize="14dp"
                                 android:textColor="@color/white"
-                                android:text="Light History"
+                                android:text="@string/history"
                                 />
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
-                        android:layout_width="180dp"
-                        android:layout_height="190dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="104dp"
                         android:layout_margin="8dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -288,19 +365,30 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:background="#668475"
+                            android:background="@color/dashboardColor"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableBottom="@mipmap/ic_launcher_nitrogen"
                                 android:layout_marginTop="0dp"
                                 android:textAlignment="textEnd"
                                 android:id="@+id/nitrogen"
                                 android:text=""
                                 android:textSize="24dp"
                                 android:textColor="@color/green"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="Nitrogen Dioxide"
+                                android:drawablePadding="5dp"
+                                android:drawableLeft="@drawable/ic_nitrogen"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <View
@@ -316,19 +404,17 @@
                                 android:gravity="center"
                                 android:background="@color/background_color"
                                 android:padding="5dp"
-                                android:textSize="16dp"
+                                android:textSize="14dp"
                                 android:textColor="@color/white"
-                                android:text="Nitrogen History"
+                                android:text="@string/history"
                                 />
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-
                 </LinearLayout>
 
 
             </LinearLayout>
-            /
 
         </android.support.v4.widget.NestedScrollView>
 

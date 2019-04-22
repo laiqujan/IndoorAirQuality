@@ -1,146 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        tools:context=".UnitsFragment"
-        android:background="@color/background_color"
-        android:padding="20dp">
-       <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="UNITS"
-            android:textColor="@color/white_greyish"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/green"
+tools:context=".UnitsFragment">
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
-       <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_launcher_temp"
-        android:drawablePadding="0dp"
-        android:gravity="center_vertical"
-        android:inputType="textCapWords"
-        android:padding="0dp"
-        android:singleLine="true"
-        android:text="   Temperature                      °C"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="16sp" />
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:background="@color/white_greyish" />
+ <LinearLayout
+     android:id="@+id/ll"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:background="@color/green"
+     android:orientation="vertical"
+     android:gravity="center"
+     android:padding="0dp">
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="UNITS"
+      android:textColor="@color/white"
+      android:paddingTop="5dp"
+      android:textSize="30dp"
+      android:textStyle="bold" />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
 
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_launcher_hum"
-        android:drawablePadding="0dp"
-        android:gravity="center_vertical"
-        android:inputType="textCapWords"
-        android:padding="0dp"
-        android:singleLine="true"
-        android:text="   Humidity                             %"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="16sp" />
+   <android.support.v7.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="80dp"
+       android:layout_margin="8dp"
+       android:clickable="true"
+       android:foreground="?android:attr/selectableItemBackground">
 
-        <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="@color/white_greyish"
-        />
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_launcher_carbon"
-        android:drawablePadding="0dp"
-        android:gravity="center_vertical"
-        android:text="   Carbon Monoxide             ppm"
-        android:inputType="textCapWords"
-        android:padding="0dp"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="16sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dashboardColor"
+        android:gravity="center"
+        android:orientation="vertical">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="0dp"
+         android:text="Temperature--°C"
+         android:drawableLeft="@drawable/ic_thermometer"
+         android:gravity="center"
+         android:textColor="@color/sensorsList"
+         android:drawablePadding="15dp"
+         android:textSize="20dp"
+         android:textStyle="bold" />
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:layout_margin="5dp"
+         android:background="@color/lightgray" />
+    </LinearLayout>
+   </android.support.v7.widget.CardView>
+  </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
 
-        <View
-        android:layout_width="fill_parent"
-        android:layout_height="3px"
-        android:background="@color/white_greyish"
-        />
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_launcher_nitrogen"
-        android:drawablePadding="0dp"
-        android:gravity="center_vertical"
-        android:text="   Nitrogen Oxide                  ppm"
-        android:inputType="textCapWords"
-        android:padding="0dp"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="16sp" />
+   <android.support.v7.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="80dp"
+       android:layout_margin="8dp"
+       android:clickable="true"
+       android:foreground="?android:attr/selectableItemBackground">
 
-        <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="@color/white_greyish" />
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_launcher_noise"
-        android:drawablePadding="0dp"
-        android:gravity="center_vertical"
-        android:text="   Noise                                   dB"
-        android:inputType="textCapWords"
-        android:padding="0dp"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="16sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/dashboardColor"
+        android:orientation="vertical">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="0dp"
+         android:text="Humidity--%"
+         android:drawableLeft="@drawable/ic_humpercentage"
+         android:gravity="center"
+         android:textColor="@color/sensorsList"
+         android:drawablePadding="15dp"
+         android:textSize="20dp"
+         android:textStyle="bold" />
 
-        <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="@color/white_greyish"
-        />
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_launcher_light"
-        android:drawablePadding="0dp"
-        android:gravity="center_vertical"
-        android:text="   Light                                     lux"
-        android:inputType="textCapWords"
-        android:padding="0dp"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="16sp" />
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:layout_margin="5dp"
+         android:background="@color/lightgray" />
 
-        <View
-        android:layout_width="fill_parent"
-        android:layout_height="3px"
-        android:background="@color/white_greyish"
-        />
+    </LinearLayout>
+   </android.support.v7.widget.CardView>
+  </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
 
-</LinearLayout>
+   <android.support.v7.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="80dp"
+       android:layout_margin="8dp"
+       android:clickable="true"
+       android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/dashboardColor"
+        android:orientation="vertical">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="0dp"
+         android:text="Carbon Monoxide--ppm"
+         android:drawableLeft="@drawable/ic_carbon_monoxide"
+         android:gravity="center"
+         android:textColor="@color/sensorsList"
+         android:drawablePadding="15dp"
+         android:textSize="20dp"
+         android:textStyle="bold" />
+
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:layout_margin="5dp"
+         android:background="@color/lightgray" />
+
+    </LinearLayout>
+   </android.support.v7.widget.CardView>
+  </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
+
+   <android.support.v7.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="80dp"
+       android:layout_margin="8dp"
+       android:clickable="true"
+       android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dashboardColor"
+        android:gravity="center"
+        android:orientation="vertical">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="0dp"
+         android:text="Nitrogen Oxide--ppm"
+         android:drawableLeft="@drawable/ic_nitrogen"
+         android:gravity="center"
+         android:textColor="@color/sensorsList"
+         android:drawablePadding="15dp"
+         android:textSize="20dp"
+         android:textStyle="bold" />
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:layout_margin="5dp"
+         android:background="@color/lightgray" />
+    </LinearLayout>
+   </android.support.v7.widget.CardView>
+  </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
+
+   <android.support.v7.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="80dp"
+       android:layout_margin="8dp"
+       android:clickable="true"
+       android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dashboardColor"
+        android:gravity="center"
+        android:orientation="vertical">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="0dp"
+         android:text="Noise--dB"
+         android:drawableLeft="@drawable/ic_noise"
+         android:gravity="center"
+         android:textColor="@color/sensorsList"
+         android:drawablePadding="15dp"
+         android:textSize="20dp"
+         android:textStyle="bold" />
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:layout_margin="5dp"
+         android:background="@color/lightgray" />
+    </LinearLayout>
+   </android.support.v7.widget.CardView>
+  </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
+
+   <android.support.v7.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="80dp"
+       android:layout_margin="8dp"
+       android:clickable="true"
+       android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dashboardColor"
+        android:gravity="center"
+        android:orientation="vertical">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="0dp"
+         android:text="Light--lux"
+         android:drawableLeft="@drawable/ic_balancelight"
+         android:gravity="center"
+         android:textColor="@color/sensorsList"
+         android:drawablePadding="15dp"
+         android:textSize="20dp"
+         android:textStyle="bold" />
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:layout_margin="5dp"
+         android:background="@color/lightgray" />
+    </LinearLayout>
+   </android.support.v7.widget.CardView>
+  </LinearLayout>
+
+ </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

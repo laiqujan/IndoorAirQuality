@@ -34,7 +34,7 @@ public class HomeFragement extends Fragment  {
     Button nitrogenHistory;
     Button noiseHistory;
     Button lightHistory;
-
+    TextView time;
     private BroadcastReceiver minuteUpdateReceiver;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +47,7 @@ public class HomeFragement extends Fragment  {
         noise=view.findViewById(R.id.noise);
         light=view.findViewById(R.id.light);
         nitrogen=view.findViewById(R.id.nitrogen);
+        time= view.findViewById(R.id.time);
         temperatureHistory= view.findViewById(R.id.temperatureHistory);
         carbonHistory= view.findViewById(R.id.carbonHistory);
         humidityHistory= view.findViewById(R.id.humidityHistory);

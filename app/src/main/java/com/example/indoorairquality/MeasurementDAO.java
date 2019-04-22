@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.database.Cursor;
 import java.util.ArrayList;
+import java.util.Date;
+
 public class MeasurementDAO extends DAOBase {
     //This class is used to handle Database with specific operation
     private static final int DATABASE_VERSION = 1;
